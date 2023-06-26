@@ -68,10 +68,17 @@ using(var scope = app.Services.CreateScope())
         await userManager.CreateAsync(user, password);
         await userManager.AddToRoleAsync(user, "Admin");
     }
+    
+    email = "customer@customer.com";
+    if (await userManager.FindByEmailAsync(email) == null)
+    {
+        var user = new IdentityUser();
+        user.UserName = email;
+        user.Email = email;
 
-    // After register customer@customer.com on Register page, add Customer role
-    //var userCustomer = await userManager.FindByEmailAsync("customer@customer.com");
-    //await userManager.AddToRoleAsync(userCustomer, "Customer");
+        await userManager.CreateAsync(user, password);
+        await userManager.AddToRoleAsync(user, "Customer");
+    }
 }
 
 app.Run();

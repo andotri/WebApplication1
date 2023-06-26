@@ -1,2 +1,3 @@
 dotnet new gitignore
 Update-Database
+Add-Migration initdata
